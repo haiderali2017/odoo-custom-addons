@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="job_rec_action" model="ir.actions.act_window">
+        <field name = "name">Job Recruitment</field>
+        <field name = "res_model">job.recruitment</field>
+        <field name = "view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Recruitment" id="base_menu" parent="hr_recruitment.menu_crm_case_categ0_act_job" />
+    <menuitem name="Apply Here" id="apply_here_menu" parent="base_menu" action="job_rec_action" />
+
+    <record id="job_rec_view_form" model="ir.ui.view">
+        <field name = "name">Job Recruitment Form</field>
+        <field name = "model">job.recruitment</field>
+        <field name = "arch" type = "xml">
+            <form>
+                <header>
+                    <button name="submit_new" string="Submit" states="new" class="oe_highlight" type="object"/>
+                    <button name="approve" string="Approve" states="to_approve" class="oe_highlight" type="object"/>
+                    <button name="create_pos" string="Create Job Position" states="approved" class="oe_highlight" type="object"/>
+                    <button name="reject" string="Reject" states="to_approve" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <field name="requested_on"/>
+                    <field name="users"/>
+                </group>
+                <notebook>
+                    <page string="Details">
+                        <field name="jobs">
+                            <tree>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="dept"/>
+                                <field name="new_employees"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="dept"/>
+                                    </group>
+                                    <group>
+                                        <field name="new_employees"/>
+                                    </group>
+                                    <group>
+                                        <field name="description"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="job_rec_view_tree" model="ir.ui.view">
+        <field name = "name">Job Recruitment List</field>
+        <field name = "model">job.recruitment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="requested_on"/>
+                <field name="users"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

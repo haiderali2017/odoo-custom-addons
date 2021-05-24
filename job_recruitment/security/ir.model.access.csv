@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_job_recruiter,job.recruitment_recuiter,model_job_recruitment,,1,1,1,1
+access_job_data,recruitment.data_recuiter,model_recruitment_data,,1,1,1,1
