@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    adding res.users for use in adding branches below-->
+    <record id="person_1" model="res.users">
+        <field name="name">Marc Demo</field>
+        <field name="login">template</field>
+    </record>
+    <record id="person_2" model="res.users">
+        <field name="name">Joel Willis</field>
+        <field name="login">template2</field>
+    </record>
+    <record id="person_3" model="res.users">
+        <field name="name">Mitchell Admin</field>
+        <field name="login">template3</field>
+    </record>
+
+<!--    adding branches-->
+    <record id="assign_branches_rec_1" model="branch.data">
+        <field name="person" eval="ref('person_1')"/>
+        <field name="name"> Branch 1 </field>
+    </record>
+    <record id="assign_branches_rec_2" model="branch.data">
+        <field name="person" eval="ref('person_1')"/>
+        <field name="name"> Branch 2 </field>
+    </record>
+    <record id="assign_branches_rec_3" model="branch.data">
+        <field name="person" eval="ref('person_2')"/>
+        <field name="name"> Branch 3 </field>
+    </record>
+    <record id="assign_branches_rec_4" model="branch.data">
+        <field name="person" eval="ref('person_2')"/>
+        <field name="name"> Branch 4 </field>
+    </record>
+    <record id="assign_branches_rec_5" model="branch.data">
+        <field name="person" eval="ref('person_3')"/>
+        <field name="name"> Branch 5 </field>
+    </record>
+    <record id="assign_branches_rec_6" model="branch.data">
+        <field name="person" eval="ref('person_3')"/>
+        <field name="name"> Branch 6 </field>
+    </record>
+</odoo>

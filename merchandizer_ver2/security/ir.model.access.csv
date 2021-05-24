@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monthly_plan,monthly.plan,model_monthly_plan,,1,1,1,1
+access_monthly_details,monthly.details,model_monthly_details,,1,1,1,1
+access_branch_data,branch.data,model_branch_data,,1,1,1,1
+access_daily_plan,daily.plan,model_daily_plan,,1,1,1,1
+access_daily_details,daily.details,model_daily_details,,1,1,1,1

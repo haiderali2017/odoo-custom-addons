@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="merch_visit" model="ir.actions.act_window">
+    <field name="name">Monthly Plan</field>
+    <field name="res_model">monthly.plan</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="merch_visit_form" model="ir.ui.view">
+    <field name="name">Monthly Plan</field>
+    <field name="model">monthly.plan</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="approve_button" string="Approve" states="draft" type="object"/>
+          <button name="reject_button" string="Reject" states="draft" type="object"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <group>
+          <field name="month" attrs="{'readonly':[('state','in',('approved','rejected'))]}" />
+          <field name="year" attrs="{'readonly':[('state','in',('approved','rejected'))]}" />
+          <field name="sales_person" attrs="{'readonly':[('state','in',('approved','rejected'))]}" options="{'no_create': True}"/>
+        </group>
+        <notebook>
+          <page string="Monthly Plan Lines">
+            <field name="monthly_plan_id" attrs="{'readonly':[('state','in',('approved','rejected'))]}">
+              <tree editable="bottom">
+                <field name="dated"/>
+                <!-- no_quick_create, no_create_edit, no_create, no_open -->
+                <field name="collect_branch" domain="[('person', '=', parent.sales_person)]" options="{'no_create': True}" widget="many2many_tags"/>
+              </tree>
+            </field>
+          </page>
+        </notebook>
+      </form>
+    </field>
+  </record>
+  <record id="merch_visit_tree" model="ir.ui.view">
+    <field name="name">Monthly Plan</field>
+    <field name="model">monthly.plan</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="sales_person"/>
+        <field name="month"/>
+        <field name="year"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
+
+  <menuitem name="Merchandizer Visit" id="base_menu"/>
+  <menuitem name="Monthly Plan" id="monthly_plan_menu" parent="base_menu" action="merch_visit"/>
+</odoo>

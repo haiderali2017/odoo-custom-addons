@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    adding data in monthly plan -->
+    <record id="monthly_plan_1" model="monthly.plan">
+        <field name="month">3</field>
+        <field name="year">2021</field>
+        <field name="sales_person" eval="ref('person_1')"/>
+    </record>
+
+<!--    adding data in monthly details -->
+    <record id="monthly_details_1" model="monthly.details">
+        <field name="dated">2021-03-23</field>
+        <field name="collect_branch" eval="[(6,0,[ref('assign_branches_rec_1'),ref('assign_branches_rec_2')])]"/>
+        <field name="monthly_plan_details" eval="ref('monthly_plan_1')"/>
+    </record>
+    <record id="monthly_details_2" model="monthly.details">
+        <field name="dated">2021-03-24</field>
+        <field name="collect_branch" eval="[(6,0,[ref('assign_branches_rec_1'),ref('assign_branches_rec_2')])]"/>
+        <field name="monthly_plan_details" eval="ref('monthly_plan_1')"/>
+    </record>
+
+</odoo>

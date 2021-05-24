@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="merch_visit2" model="ir.actions.act_window">
+    <field name="name">Assign Branches</field>
+    <field name="res_model">branch.data</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="merch_visit2_form" model="ir.ui.view">
+    <field name="name">Assign Branches</field>
+    <field name="model">branch.data</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <field name="person"/>
+          <field name="name"/>
+        </group>
+      </form>
+    </field>
+  </record>
+  <record id="merch_visit2_tree" model="ir.ui.view">
+    <field name="name">Assign Branches</field>
+    <field name="model">branch.data</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="person"/>
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <menuitem name="Assign Branches" id="branches_menu" parent="base_menu" action="merch_visit2"/>
+
+</odoo>

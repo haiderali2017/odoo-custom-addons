@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <!--  start of daily plan view-->
+  <record id="merch_visit3" model="ir.actions.act_window">
+    <field name="name">Daily Plan</field>
+    <field name="res_model">daily.plan</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="merch_visit3_form" model="ir.ui.view">
+    <field name="name">Daily Plan</field>
+    <field name="model">daily.plan</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group>
+            <field name="state" invisible="1"/>
+            <field name="sales_person" attrs="{'readonly':[('state','in',('draft'))]}"/>
+          </group>
+          <group>
+            <field name="dated" attrs="{'readonly':[('state','in',('draft'))]}"/>
+          </group>
+        </group>
+        <notebook>
+          <page string="Relevant Data">
+            <field name="daily_plan_id">
+              <tree editable="bottom">
+                <field name="branches"/>
+                <field name="status"/>
+                <field name="inventory" widget="many2many_binary"/>
+                <field name="images" widget="many2many_binary"/>
+              </tree>
+              <form>
+                <group>
+                  <field name="branches"/>
+                </group>
+              </form>
+            </field>
+          </page>
+        </notebook>
+      </form>
+    </field>
+  </record>
+  <record id="merch_visit3_tree" model="ir.ui.view">
+    <field name="name">Daily Plan</field>
+    <field name="model">daily.plan</field>
+    <field name="arch" type="xml">
+      <tree delete="false">
+        <field name="sales_person"/>
+        <field name="dated"/>
+      </tree>
+    </field>
+  </record>
+
+  <menuitem name="Daily Plan" id="daily_plan_menu" parent="base_menu" action="merch_visit3"/>
+
+</odoo>
