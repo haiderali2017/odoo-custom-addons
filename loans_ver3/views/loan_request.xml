@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loans_action" model="ir.actions.act_window">
+        <field name = "name">Loans</field>
+        <field name = "res_model">manage.loans</field>
+        <field name = "view_mode">tree,form</field>
+    </record>
+
+
+    <!--  loans view form -->
+    <record id="loans_view_form" model="ir.ui.view">
+        <field name = "name">Loans</field>
+        <field name = "model">manage.loans</field>
+        <field name = "arch" type = "xml">
+            <form>
+                <header>
+                    <button name="to_submit" string="Submit" states="draft" class="oe_highlight" type="object"/>
+                    <button name="in_progress" string="In Progress" states="to_submit" class="oe_highlight" type="object"/>
+                    <button name="reject" string="Reject" states="in_process" type="object"/>
+                    <button name="approve" string="Approve" states="in_process" class="oe_highlight" type="object"/>
+                    <button name="register_payment" string="Register Payment" states="approved" class="oe_highlight" type="object"/>
+                    <button name="forward1" string="Forward Next Month" states="approved" type="object"/>
+                    <button name="forward2" string="Forward Next Month" states="paid" type="object"/>
+                    <button name="post_journal" string="Post Journal" states="paid" type="object"/>
+                    <button name="paid" string="Paid" states="to_approve" type="object"/>
+                    <button name="cancelled" string="Cancelled" states="to_submit" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="requester"/>
+                        <field name="employees"/>
+                        <field name="job_position"/>
+                        <field name="department"/>
+                        <field name="description"/>
+                        <field name="rel_loan_type"/>
+                    </group>
+                    <group>
+                        <field name="date2"/>
+                        <field name="payment_type"/>
+                        <field name="date"/>
+                        <field name="installment_amt" attrs=" {'invisible': [ ('payment_type','=','installment_no' ) ]}"/>
+                        <field name="installment_no" attrs=" {'invisible': [ ('payment_type','=','installment_amount' ) ]}"/>
+                        <field name="loan_amount"/>
+                        <field name="forward_next_month" states="approved"/>
+                        <field name="rel_loan_acc"/>
+                    </group>
+                </group>
+                <!-- start of installments tree -->
+                <notebook>
+                    <page string="Installments">
+                        <field name="rel_installment">
+                            <tree>
+                                <field name="emp_name"/>
+                                <field name="loan_ref"/>
+                                <field name="description"/>
+                                <field name="payment_date"/>
+                                <field name="amount"/>
+                                <field name="status"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+
+    <!--  loans view tree -->
+    <record id="loans_view_tree" model="ir.ui.view">
+        <field name = "name">Loans</field>
+        <field name = "model">manage.loans</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="requester"/>
+                <field name="description"/>
+                <field name="date"/>
+                <field name="payment_type"/>
+                <field name="loan_amount"/>
+                <field name="employees"/>
+                <field name="job_position"/>
+                <field name="department"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--  search view -->
+    <record id="loans_view_search" model="ir.ui.view">
+        <field name = "name">Loans</field>
+        <field name = "model">manage.loans</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="requester"/>
+                <field name="job_position"/>
+                <filter string="Installment Number" name="payment_type" domain="[('payment_type','=','installment_no')]" />
+                <separator />
+                <filter string="Installment Amount" name="payment_type" domain="[('payment_type','=','installment_amount')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Payment Type" name="payment_type" context="{'group_by':'payment_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- start of loan types view -->
+
+    <record id="loan_types_action" model="ir.actions.act_window">
+        <field name = "name">Loan types</field>
+        <field name = "res_model">manage.loantypes</field>
+        <field name = "view_mode">tree,form</field>
+    </record>
+
+    <record id="loan_type_view_form" model="ir.ui.view">
+        <field name = "name">Loan Types</field>
+        <field name = "model">manage.loantypes</field>
+        <field name = "arch" type = "xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="loans_type_view_tree" model="ir.ui.view">
+        <field name = "name">Loan Types</field>
+        <field name = "model">manage.loantypes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem name="Loans" id="base_menu" />
+    <menuitem name="Loan Request" id="loan_request_menu" parent="base_menu" action="loans_action" />
+    <menuitem name="Loan Type" id="loan_type_menu" parent="base_menu" action="loan_types_action"/>
+
+
+</odoo>
